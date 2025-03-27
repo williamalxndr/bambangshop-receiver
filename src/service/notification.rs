@@ -1,5 +1,7 @@
+use std::ops::{Not, Sub};
 use std::thread;
 
+use rocket::fairing::AdHoc;
 use rocket::http::hyper::request;
 use rocket::http::Status;
 use rocket::log;
@@ -7,6 +9,7 @@ use rocket::serde::json::to_string;
 use rocket::tokio;
 
 use bambangshop_receiver::{APP_CONFIG, REQWEST_CLIENT, Result, compose_error_response};
+use crate::controller::notification;
 use crate::model::notification::Notification;
 use crate::model::subscriber::SubscriberRequest;
 use crate::repository::notification::NotificationRepository;
@@ -90,7 +93,9 @@ impl NotificationService {
         }
     }
         
-    
-    
+    pub fn receive_notification(payload: Notification) -> Result<Notification> {
+        let subscriber_result: Notification = NotificationRepository::add(payload);
+        return Ok(subscriber_result);
+    }
 
 }
