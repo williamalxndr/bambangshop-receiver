@@ -59,14 +59,14 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   Open another new terminal, edit `ROCKET_PORT` in `.env` to `8003`, then execute `cargo run`.
 
 ## Mandatory Checklists (Subscriber)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create SubscriberRequest model struct.`
-    -   [ ] Commit: `Create Notification database and Notification repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Notification repository.`
-    -   [ ] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create SubscriberRequest model struct.`
+    -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Notification repository.`
+    -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,8 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. Menggunakan `RwLock<>` diperlukan untuk memungkinkan akses yang lebih efisien terhadap daftar notifikasi secara bersamaan oleh beberapa thread dibandingkan `Mutex<>`. Keduanya sama sama digunakan untuk mengelola akses data dalam multi-threaded server agar tidak thread ada yang mengelola data yang sama. Namun `Mutex<>` hanya memungkinkan satu thread untuk mengakses data baik baca maupun tulis, sedangkan `RwLock<>` memungkinkan beberapa thread untuk membaca data bersamaan selama tidak ada thread yang menulis. Hal ini dibutuhkan pada method add yang membutuhkan satu thread pada satu data, dan method list_all_as_string yang membutuhkan banyak thread membaca data bersamaan tanpa perlu menunggu.
+
+2. Rust tidak mengizinkan kita untuk memodifikasi variabel statis secara langsung seperti yang bisa dilakukan di Java, karena pendekatan Rust yang sangat mengutamakan keamanan di lingkungan multi threaded. Di Java, variabel statis bersifat mutable secara default, dan kita bisa mengubah isinya melalui metode statis. Namun, ini membawa risiko terkait dengan masalah seperti kondisi balapan (race condition) dalam lingkungan multi threaded.
 
 #### Reflection Subscriber-2
