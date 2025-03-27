@@ -77,7 +77,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement receive function in Notification controller.`
     -   [x] Commit: `Implement list_messages function in Notification service.`
     -   [x] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -90,3 +90,8 @@ This is the place for you to write reflections:
 2. Rust tidak mengizinkan kita untuk memodifikasi variabel statis secara langsung seperti yang bisa dilakukan di Java, karena pendekatan Rust yang sangat mengutamakan keamanan di lingkungan multi threaded. Di Java, variabel statis bersifat mutable secara default, dan kita bisa mengubah isinya melalui metode statis. Namun, ini membawa risiko terkait dengan masalah seperti kondisi balapan (race condition) dalam lingkungan multi threaded.
 
 #### Reflection Subscriber-2
+1. Saya mengexplore file `src/lib.rs`, dari pemahaman saya file ini berisi konfigurasi konfigurasi yang dibutuhkan aplikasi kita seperti pengaturan URL root instance dan publisher lalu juga file ini memberi tahu aplikasi kita bahwa konfigurasi aplikasi disimpan di file `.env`. Selain menyimpan konfigurasi, file ini juga menyediakan helper method seperti `compose_error_response` yang dipakai di notification service.
+
+2. Dengan menggunakan Observer pattern, menambah subscriber baru jadi lebih mudah karena pattern ini memisahkan publisher dari subscriber. Ketika publisher mengirimkan update, semua subscriber yang terdaftar akan menerima notifikasi secara otomatis. Hal ini memungkinkan fleksibilitas untuk menambah atau mengurangi subscriber tanpa mempengaruhi kode publisher, karena keduanya terpisah secara jelas.
+
+3. Saya sudah mencoba menggunakan postman untuk mencoba endpoint endpoint yang sudah kita buat, seperti mencoba untuk mencari cara agar mendapat http response status yang tidak error pada Subscribe to type bambangshop receiver dengan cara menambahkan produk dulu di bambangshop (langkah 30). Saya juga mencoba coba untuk endpoint lainnya seperti list all product, get product by id, dll. Saya merasa bahwa ini adalah fitur yang sangat berguna untuk testing API. Dengan adanya postman collection, kita tidak perlu lagi debug secara manual di program kita untuk melakukan testing atau sekedar verifikasi.
